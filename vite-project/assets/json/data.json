@@ -1,7 +1,29 @@
 {
-    "images": [
-        {
-            
-        }
-    ]
+  "images": [
+    {
+      "img": "../assets/images/bear-picnic.jpg",
+      "title": "Bear",
+      "text": "texttext"
+    },
+    {
+      "img": "../assets/images/cat.jpg",
+      "title": "Bear2",
+      "text": "texttext"
+    },
+    {
+      "img": "../assets/images/mouse.jpg",
+      "title": "bear3",
+      "text": "texttext"
+    },
+    {
+      "img": "../assets/images/owl.jpg",
+      "title":"bear4",
+      "text": "texttext"
+    },
+    {
+      "img": "../assets/images/sunflower.jpg",
+      "title":"bear5",
+      "text": "texttext"
+    }
+  ]
 }
