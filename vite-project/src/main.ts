@@ -2,5 +2,9 @@ import "./styles/style.scss";
 import App from "./app";
 
 (function () {
-  new App();
+
+  const slider = new App();
+
+console.log(slider)
+
 })();
