@@ -1,10 +1,9 @@
 import "./styles/style.scss";
 import App from "./app";
+import Sliders from "./slider";
 
 (function () {
 
-  const slider = new App();
-
-console.log(slider)
+  new App();
 
 })();

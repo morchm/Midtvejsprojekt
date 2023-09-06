@@ -31,13 +31,6 @@ img{
   left: 100%;
 }
 
-.slider{
-  width: 50%;
-  height: 90%;
-  position: relative;
-  overflow: hidden;
-}
-
 .div {
   width: 1000px;
   height: 600px;
@@ -45,31 +38,56 @@ img{
   border-radius: 25px;
   padding: 4rem;
 
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  grid-template-rows: 1fr auto;
 }
 
+.slider{
+  position: relative;
+  overflow: hidden;
+}
+
+
 #card__text_container{
-  width: 50%;
   height: 300px;
   margin: 1rem;
 }
 
 h1{
-  font-size: 2rem;
+  font-size: 3rem;
   text-align: center;
   border-bottom: 2px solid black;
   margin-bottom: 1rem;
 }
 
-button{
-  width: 100px;
-  height: 50px;
-  background-color: hotpink;
+p{
+  font-size: 1.5rem;
+}
 
-  transition: 150ms ease-in-out;
+#dotContainer{
+  margin: auto;
+  padding: 10px;
+}
+
+.dots{
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+  margin: 5px 5px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+
+  transition: 200ms ease-in-out;
 
   &:hover{
-    background-color: darken(hotpink, 50%);
+    background-color: darken(gray, 20%);
+  }
+
+  &:active{
+    background-color: black;
+    cursor: default;
   }
 }
