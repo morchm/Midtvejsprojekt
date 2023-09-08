@@ -1,10 +1,10 @@
-import { images } from "../assets/json/data.json";
+import { content } from "../assets/json/data.json";
 
 class App {
-  currIndex: number;
-  prevIndex: number;
+  currIndex: number = 0;
+  prevIndex: number = 1;
   constructor() {
-    //Container
+    //Main container
     const containerCard = document.createElement("div");
     containerCard.className = "div";
     document.body.appendChild(containerCard);
@@ -14,14 +14,14 @@ class App {
     slider.className = "slider";
     containerCard.appendChild(slider);
 
-    const imgElements = images.map((value) => {
-      //Img-element
-      const img = document.createElement("img");
-      img.classList.add("image-slider", "fade");
-      img.src = value.img;
-      slider.appendChild(img);
-      return img;
-    });
+    const imgContainer = document.createElement("div");
+    imgContainer.className = "img_container";
+    slider.appendChild(imgContainer);
+
+    //knapper
+    const dotContainer = document.createElement("div");
+    dotContainer.className = "dotContainer";
+    slider.appendChild(dotContainer);
 
     //Text-element
     const textContainer = document.createElement("div");
@@ -36,65 +36,56 @@ class App {
     textCard.id = "card__text";
     textContainer.appendChild(textCard);
 
-    //Skift af billeder
-    this.currIndex = 0;
-    this.prevIndex = 1;
+    const imgElements = content.map((value, index) => {
+      //Img-element
+      const img = document.createElement("img");
+      img.classList.add("image-slider");
+      // img.style.backgroundImage = `url(${value.img})`;
+      img.src = value.img;
+      imgContainer.appendChild(img);
 
-    // containerCard.addEventListener("click", () => {
-    // //Siger at prevIndex er hvad currIndex er lige nu.
-    // this.prevIndex = this.currIndex;
-    // //Siger at currIndex nu er +1
-    // this.currIndex++;
-
-    // //Får fat på det resterende af currIndex / 5
-    // //Dette gør at billeder looper igennem
-    // this.currIndex = this.currIndex % imgElements.length;
-
-    // //Giver det loop, hvor alle bileder bliver lavet, en ny style når der trykkes
-    // imgElements[this.currIndex].style.left = 0 + "%";
-    // changeText(this.currIndex);
-    // imgElements[this.prevIndex].style.left = 100 + "%";
-
-    //   console.log(this);
-    // });
-
-    //Skiftning af billeder med tastaturknapper
-    // document.addEventListener("keyup", () => {
-    //   this.prevIndex = this.currIndex;
-    //   this.currIndex--;
-
-    //   if (this.currIndex < 0) this.currIndex = imgElements.length - 1;
-
-    //   imgElements[this.currIndex].style.left = 0 + "%";
-    //   imgElements[this.prevIndex].style.left = 100 + "%";
-    // });
-    
-    //Skiftning af tekst
-    changeText(this.currIndex);
-    function changeText(i: number) {
-      titleCard.innerHTML = images[i].title;
-      textCard.innerHTML = images[i].text;
-    }
-
-    //knapper
-    const dotContainer = document.createElement("div");
-    dotContainer.id = "dotContainer";
-    containerCard.appendChild(dotContainer);
-
-    imgElements.forEach(() => {
       const dot = document.createElement("span");
       dot.className = "dots";
-
+      dot.index = index;
       dotContainer.appendChild(dot);
+      dot.addEventListener("click", (e) => {
+        if (e.target.index == this.currIndex) return;
 
-      dot.addEventListener("click", () => {
+        var nextFrom, prevTo;
+
+        if (e.target.index > this.currIndex) {
+          prevTo = -100;
+          nextFrom = 100;
+        } else {
+          prevTo = 100;
+          nextFrom = -100;
+        }
+
+        imgElements[this.prevIndex].removeAttribute("style");
         this.prevIndex = this.currIndex;
-        this.currIndex++;
-        this.currIndex = this.currIndex % imgElements.length;
-        imgElements[this.currIndex].style.left = 0 + "%";
-        imgElements[this.prevIndex].style.left = 100 + "%";
+        // add animation
+        // tweak animation params
+        imgElements[this.prevIndex].style.setProperty("--to", prevTo + "%");
+        imgElements[this.prevIndex].style.animationName = "prev";
+        this.currIndex = e.target.index;
+        // add animation
+        // tweak animation params
+        imgElements[this.currIndex].style.setProperty("--from", nextFrom + "%");
+        imgElements[this.currIndex].style.animationName = "next";
+
+        titleCard.innerHTML = content[this.currIndex].title
+        textCard.innerHTML = content[this.currIndex].text
       });
+
+      return img;
     });
+
+    //Så vi starter med at have et billede på hjemmesiden.
+    imgElements[this.currIndex].style.left = 0 + "%";
+    titleCard.innerHTML = content[this.currIndex].title
+    textCard.innerHTML = content[this.currIndex].text
+
+
   } //END constructor
 } //END class
 export default App;

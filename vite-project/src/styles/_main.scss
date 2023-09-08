@@ -22,15 +22,6 @@ body {
   background-color: $black-bean;
 }
 
-
-img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  left: 100%;
-}
-
 .div {
   width: 1000px;
   height: 600px;
@@ -38,40 +29,55 @@ img{
   border-radius: 25px;
   padding: 4rem;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
 
-  grid-template-rows: 1fr auto;
+  // grid-template-rows: 1fr auto;
+  display: flex;
 }
 
-.slider{
-  position: relative;
+.slider {
   overflow: hidden;
+  height: 100%;
+  width: 50%;
 }
 
-
-#card__text_container{
-  height: 300px;
-  margin: 1rem;
+.img_container {
+  position: relative;
+  height: 90%;
+  width: 100%;
 }
 
-h1{
+#card__text_container {
+  height: 100%;
+  width: 50%;
+  // margin: 1rem;
+  padding: 0 0 0 2rem;
+  overflow: auto;
+}
+
+h1 {
   font-size: 3rem;
   text-align: center;
   border-bottom: 2px solid black;
   margin-bottom: 1rem;
 }
 
-p{
-  font-size: 1.5rem;
+p {
+  font-size: 1.3rem;
+  line-height: 1.4;
 }
 
-#dotContainer{
+.dotContainer {
   margin: auto;
+  height: 10%;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.dots{
+.dots {
   cursor: pointer;
   height: 10px;
   width: 10px;
@@ -82,12 +88,47 @@ p{
 
   transition: 200ms ease-in-out;
 
-  &:hover{
+  &:hover {
     background-color: darken(gray, 20%);
   }
 
-  &:active{
+  &:active {
     background-color: black;
     cursor: default;
   }
 }
+
+.image-slider {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  left: 100%;
+
+  --from: 0%;
+  --to: 100%;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes next {
+  from {
+    left: var(--from);
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes prev {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: var(--to);
+  }
+}
+
+
