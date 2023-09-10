@@ -46,14 +46,18 @@ class App {
 
       const dot = document.createElement("span");
       dot.className = "dots";
-      dot.index = index;
+      dot.setAttribute("data-index", `${index}`)
       dotContainer.appendChild(dot);
-      dot.addEventListener("click", (e) => {
-        if (e.target.index == this.currIndex) return;
+      dot.addEventListener("click", () => {
+        // doing two ifs that do the same thing because TS is a pain to work with
+        // not sure how else to guarantee if dataset.index exists
+        // if combined into a single if with AND operator it gives an error
+        if (dot.dataset.index == undefined) return
+        if (+dot.dataset.index == this.currIndex) return;
 
         var nextFrom, prevTo;
 
-        if (e.target.index > this.currIndex) {
+        if (+dot.dataset.index > this.currIndex) {
           prevTo = -100;
           nextFrom = 100;
         } else {
@@ -67,7 +71,7 @@ class App {
         // tweak animation params
         imgElements[this.prevIndex].style.setProperty("--to", prevTo + "%");
         imgElements[this.prevIndex].style.animationName = "prev";
-        this.currIndex = e.target.index;
+        this.currIndex = +dot.dataset.index;
         // add animation
         // tweak animation params
         imgElements[this.currIndex].style.setProperty("--from", nextFrom + "%");
