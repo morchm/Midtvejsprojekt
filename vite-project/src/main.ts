@@ -1,8 +1,9 @@
 import "./styles/style.scss";
-import App from "./app";
+import Slider from "./slider";
+import {content}  from "../assets/json/data.json"
 
 (function () {
-
-  new App();
+  
+  document.body.appendChild(new Slider(content).HTMLElement);
 
 })();
