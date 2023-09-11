@@ -46,14 +46,15 @@ class App {
 
       const dot = document.createElement("span");
       dot.className = "dots";
-      dot.setAttribute("data-index", `${index}`)
+      dot.setAttribute("data-index", `${index}`);
       dotContainer.appendChild(dot);
       dot.addEventListener("click", () => {
-        // doing two ifs that do the same thing because TS is a pain to work with
-        // not sure how else to guarantee if dataset.index exists
-        // if combined into a single if with AND operator it gives an error
-        if (dot.dataset.index == undefined) return
-        if (+dot.dataset.index == this.currIndex) return;
+        // would have prefered to used custom event however type script is extremely hard to comprehend right now
+        if (
+          dot.dataset.index == undefined ||
+          +dot.dataset.index == this.currIndex
+        )
+          return;
 
         var nextFrom, prevTo;
 
@@ -77,8 +78,8 @@ class App {
         imgElements[this.currIndex].style.setProperty("--from", nextFrom + "%");
         imgElements[this.currIndex].style.animationName = "next";
 
-        titleCard.innerHTML = content[this.currIndex].title
-        textCard.innerHTML = content[this.currIndex].text
+        titleCard.innerHTML = content[this.currIndex].title;
+        textCard.innerHTML = content[this.currIndex].text;
       });
 
       return img;
@@ -86,10 +87,8 @@ class App {
 
     //Så vi starter med at have et billede på hjemmesiden.
     imgElements[this.currIndex].style.left = 0 + "%";
-    titleCard.innerHTML = content[this.currIndex].title
-    textCard.innerHTML = content[this.currIndex].text
-
-
+    titleCard.innerHTML = content[this.currIndex].title;
+    textCard.innerHTML = content[this.currIndex].text;
   } //END constructor
 } //END class
 export default App;
